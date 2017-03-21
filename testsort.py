@@ -12,11 +12,9 @@ def test(a):
 	print SORTFUNCSTR, ":  ",
 	print a,
 
-	l = len(a)
 	a = SORTFUNC(a)
 
 	# check invariant
-	assert l == len(a)
 	for i in range(1, len(a)):
 		assert a[i] >= a[i-1]
 

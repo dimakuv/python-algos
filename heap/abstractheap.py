@@ -10,7 +10,7 @@ def right(i):
 	return i*2+2
 
 
-class AbstractHeap:
+class AbstractHeap(object):
 	"""priority queue using heap (abstract parent class)"""
 
 	def __init__(self, a = None):
