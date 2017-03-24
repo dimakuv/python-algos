@@ -26,7 +26,7 @@ class BinarySearchTree(object):
         self.root = None
 
     def __find(self, key, node, parent):
-        """return a pair <found Node or None, parent>"""
+        """a pair <found Node or None, parent>"""
         if node == None:
             return (None, parent)
         if key == node.key:
@@ -37,7 +37,7 @@ class BinarySearchTree(object):
             return self.__find(key, node.right, node)
 
     def find(self, key):
-        """return found Node or None"""
+        """found Node or None"""
         if self.root == None:
             return None
         return self.__find(key, self.root, None)[0]
@@ -76,7 +76,7 @@ class BinarySearchTree(object):
             node = node.parent
         return node.parent
 
-    def __updatesizes(self, node):
+    def updatesizes(self, node):
         while node and node.parent:
             node = node.parent
             node.size = 1
@@ -87,7 +87,7 @@ class BinarySearchTree(object):
 
     def insertnode(self, node):
         """insert node in BST if no existing node already"""
-        assert node == None or type(node) is Node
+        assert node == None or isinstance(node, Node)
 
         if self.root == None:
             self.root = node
@@ -105,13 +105,13 @@ class BinarySearchTree(object):
             assert parent.right == None
             parent.right = node
 
-        self.__updatesizes(node)
+        self.updatesizes(node)
 
     def insert(self, key):
         node = Node(key)
         self.insertnode(node)
 
-    def __rewireparent(self, node, newnode):
+    def rewireparent(self, node, newnode):
         """detach node and make a link between node.parent and newnode"""
         if newnode:
             newnode.parent = node.parent
@@ -126,25 +126,24 @@ class BinarySearchTree(object):
     def deletenode(self, node):
         if node == None:
             return
-        if node.left == None and node.right == None:
-            self.__rewireparent(node, None)
-        elif node.left and node.right == None:
-            self.__rewireparent(node, node.left)
-        elif node.left == None and node.right:
-            self.__rewireparent(node, node.right)
+
+        if node.left == None:
+            self.rewireparent(node, node.right)
+        elif node.right == None:
+            self.rewireparent(node, node.left)
         else:
             replace = self.next(node)
-            self.deletenode(replace)
-            self.__rewireparent(node, replace)
 
-            replace.left = node.left
-            if node.left:
-                node.left.parent = replace
-            replace.right = node.right
-            if node.right:
+            if replace.parent != node:
+                self.rewireparent(replace, replace.right)
+                replace.right = node.right
                 node.right.parent = replace
 
-        self.__updatesizes(node)
+            self.rewireparent(node, replace)
+            replace.left = node.left
+            node.left.parent = replace
+
+        self.updatesizes(node)
 
     def delete(self, key):
         node = self.find(key)
@@ -157,7 +156,7 @@ class BinarySearchTree(object):
         return self.root.size
 
     def rank(self, key):
-        """return number of nodes less than or equal to key"""
+        """number of nodes less than or equal to key"""
         res = 0
 
         node = self.root
