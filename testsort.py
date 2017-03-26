@@ -26,10 +26,16 @@ SORTFUNC    = baseline
 SORTFUNCSTR = "baseline"
 if len(sys.argv) > 1:
 	SORTFUNCSTR = sys.argv[1]
-	SORTFUNC    = importlib.import_module(SORTFUNCSTR).sort
+	SORTMODULE  = importlib.import_module(SORTFUNCSTR)
+	SORTFUNC    = SORTMODULE.sort
 
 test([0,1,2,3,4,5,6,7,8,9])
 test([9,8,7,6,5,4,3,2,1,0])
 test([1,1,1,1,1,1,1,1,1,1])
 test([1,2,3,4,3,2,1,4,3,2])
 test([int(10*random.random()) for i in xrange(10)])
+
+try:
+	test(SORTMODULE.testlist)
+except:
+	pass
