@@ -2,18 +2,12 @@ Algorithms from "Introduction to Algorithms" written in Python
 
 # Quick Usage
 
-`./testsort.py heap.minheap`
+`./testsort.py heap.minheap` for sorting algos
+`./test.py hashtable.openaddressing` for other algos (must implement func `test`)
 
 # TODO
-
-* Sorts
-  * Counting sort
-  * Radix sort
 
 * Trees
   * 2-3-4 tree
   * Splay tree
-
-* Hash tables
-  * Open addressing
 
