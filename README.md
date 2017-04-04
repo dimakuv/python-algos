@@ -11,3 +11,5 @@ Algorithms from "Introduction to Algorithms" written in Python
   * 2-3-4 tree
   * Splay tree
 
+* Dijkstra
+  * using Fibonacci heap

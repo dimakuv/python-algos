@@ -6,10 +6,10 @@ import counting
 DIGITS = 3
 
 def sort(a):
-	for i in range(DIGITS):
-		a = counting.sort(a, i)
+    for i in range(DIGITS):
+        a = counting.sort(a, i)
 
-	return a
+    return a
 
 
 testlist = [123, 321, 58, 255, 1, 0, 132, 59, 254]

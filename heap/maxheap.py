@@ -3,17 +3,17 @@
 from abstractheap import *
 
 class MaxHeap(AbstractHeap):
-	"""priority queue using maxheap"""
+    """priority queue using maxheap"""
 
-	def compare(self, l, r):
-		return l > r
+    def compare(self, l, r):
+        return l > r
 
 
 def sort(a):
-	heap = MaxHeap(a)
+    heap = MaxHeap(a)
 
-	for i in reversed(xrange(len(a))):
-		heap.buildmaxheap()
-		a[i] = heap.extract()
+    for i in reversed(xrange(len(a))):
+        heap.buildmaxheap()
+        a[i] = heap.extract()
 
-	return a
+    return a
