@@ -66,8 +66,8 @@ class AVLTree(BinarySearchTree):
         self.rebalance(node.parent)
 
     def insertnode(self, node):
-        BinarySearchTree.insertnode(self, node)
-        self.rebalance(node)
+        if BinarySearchTree.insertnode(self, node):
+            self.rebalance(node)
 
     def insert(self, key):
         node = AVLNode(key)

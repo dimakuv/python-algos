@@ -25,22 +25,22 @@ class BinarySearchTree(object):
     def __init__(self):
         self.root = None
 
-    def __find(self, key, node, parent):
+    def findpair(self, key, node, parent):
         """a pair <found Node or None, parent>"""
         if node == None:
             return (None, parent)
         if key == node.key:
             return (node, parent)
         elif key < node.key:
-            return self.__find(key, node.left, node)
+            return self.findpair(key, node.left, node)
         else:
-            return self.__find(key, node.right, node)
+            return self.findpair(key, node.right, node)
 
     def find(self, key):
         """found Node or None"""
         if self.root == None:
             return None
-        return self.__find(key, self.root, None)[0]
+        return self.findpair(key, self.root, None)[0]
 
     def __findmin(self, node):
         while node and node.left:
@@ -92,9 +92,9 @@ class BinarySearchTree(object):
         if self.root == None:
             self.root = node
 
-        found, parent = self.__find(node.key, self.root, None)
+        found, parent = self.findpair(node.key, self.root, None)
         if found:
-            return
+            return False
 
         assert parent != None
         node.parent = parent
@@ -106,6 +106,7 @@ class BinarySearchTree(object):
             parent.right = node
 
         self.updatesizes(node)
+        return True
 
     def insert(self, key):
         node = Node(key)

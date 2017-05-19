@@ -8,8 +8,8 @@ Algorithms from "Introduction to Algorithms" written in Python
 # TODO
 
 * Trees
+  * Interval tree
   * 2-3-4 tree
-  * Splay tree
 
 * Dijkstra
   * using Fibonacci heap
